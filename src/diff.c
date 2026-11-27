@@ -131,31 +131,5 @@ void text_dump(tree_node_t* node, FILE* file)
     }
 }
 
-FILE* open_dump_file() // FIXME UZHAS
-{
-    FILE* file = fopen("data/text_dump.tex", "w");
 
-    fprintf(file, "\\documentclass[12pt, a4paper]{article}\n"
-                   "\\usepackage[utf8]{inputenc}\n"
-                   "\\usepackage[T2A]{fontenc}\n"
-                   "\\usepackage[russian]{babel}\n"
-                   "\\usepackage[left=2.5cm, right=2.5cm, top=2cm, bottom=2cm]{geometry}\n"
-                   "\\usepackage{amsmath}\n"
-                   "\\usepackage{parskip}\n\n"
-
-                   "\\begin{document}\n"
-                   "\\section*{Test dump}\n\n");
-
-    fclose(file);
-    file = fopen("data/text_dump.tex", "a");
-
-    return file;
-}
-// FIXME: assert
-void close_dump_file(FILE* file)
-{
-    fprintf(file, "\\end{document}");
-
-    fclose(file);
-}
 

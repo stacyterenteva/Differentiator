@@ -1,4 +1,4 @@
-g++ src/main.c src/binary_tree.c src/diff.c src/dsl.c -o diff.exe \
+g++ src/main.c src/binary_tree.c src/diff.c src/dsl.c src/ui.c -o diff.exe \
 -lm -lpthread -ldl -lrt \
 -Wshadow -Winit-self -Wredundant-decls -Wcast-align \
 -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations \
