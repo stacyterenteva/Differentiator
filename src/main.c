@@ -28,7 +28,14 @@ int main(int argc, char* argv[])
     }
 
     FILE* expression = open_file(filename, "r");
+    if (expression == NULL) {
+        return 1;
+    }
+
     FILE* report = open_file("data/report.tex", "a");
+    if (expression == NULL) {
+        return 1;
+    }
 
     write_beginning_of_file(report);
 
@@ -47,12 +54,15 @@ int main(int argc, char* argv[])
     fprintf(report, "\n\n");
 
     tree_node_t* root_copy = copy_tree(root);
-    dump(root_copy);
 
     tree_node_t* root_diff = diff(root_copy);
     dump(root_diff);
 
+    erase_neutral_nodes(&root_diff);
+    dump(root_diff);
 
+
+//TODO: normalni dump
     //
     fprintf(report, "$$");
 
@@ -67,9 +77,9 @@ int main(int argc, char* argv[])
     fclose(report);
     system("pdflatex data/report.tex");
 
-    destroy_tree(root_diff);
-    destroy_tree(root_copy);
-    destroy_tree(root);
+    // destroy_tree(root_diff);
+    // destroy_tree(root_copy);
+    // destroy_tree(root);
 }
 
 argv_state_t process_argv(int argc, char* argv[], const char** filename)

@@ -14,7 +14,7 @@
 #define LOG(val1, val2) create_node(TYPE_OP, FUNC_LOG, val1, val2)
 #define LN(val1) create_node(TYPE_OP, FUNC_LN, NULL, val1)
 
-enum FUNCS
+enum func_num_t
 {
     FUNC_ADD,
     FUNC_SUB,
@@ -38,7 +38,7 @@ enum FUNCS
 
 struct func_t
 {
-    FUNCS func;
+    func_num_t func;
     const char* func_name;
 };
 
@@ -89,5 +89,6 @@ enum VARS {
 bool is_num(tree_node_t* node);
 bool is_var(tree_node_t* node);
 bool is_op(tree_node_t* node);
+bool is_neutral_one(tree_node_t* node, func_num_t operation, bool* is_left);
 
 #endif /* DSL_H */

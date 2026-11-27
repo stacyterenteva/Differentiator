@@ -131,5 +131,45 @@ void text_dump(tree_node_t* node, FILE* file)
     }
 }
 
+void erase_neutral_nodes(tree_node_t** node)
+{
+    bool is_num_in_left = true;
+    tree_node_t* new_node = *node;
+
+    //TODO is_neutral_node, plus zero is the same
+    if (is_neutral_one(*node, FUNC_MUL, &is_num_in_left) || is_neutral_one(*node, FUNC_POW, &is_num_in_left))
+    {
+        printf("in cond\n");
+
+        assert((*node)->left);
+        assert((*node)->right);
+
+
+        if (!is_num_in_left) {
+            new_node = copy_tree((*node)->left);
+        }
+        else {
+            new_node = copy_tree((*node)->right);
+        }
+
+        destroy_node((*node)->right);
+        destroy_node((*node)->left);
+
+        *node = new_node;
+    }
+
+    if (new_node->left != NULL) {
+        printf("go to the left\n");
+        erase_neutral_nodes(&(*node)->left);
+    }
+
+    if (new_node->right != NULL) {
+        printf("go to the left\n");
+        erase_neutral_nodes(&(*node)->right);
+    }
+
+    return;
+}
+
 
 
